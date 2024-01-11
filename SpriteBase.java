@@ -39,7 +39,8 @@ public class SpriteBase {
     }
 
     // draws the sprite
-     public void draw(Graphics2D g2) {
+     public void draw(Graphics g) {
+        Graphics2D g2=(Graphics2D)g;
         g2.setColor(color);
         g2.fill(shape);
     }
