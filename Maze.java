@@ -17,7 +17,7 @@ public class Maze {
         {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
         {true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true}
         };
-        private GridPiece[][]mapLayout=new GridPiece[20][12];
+        private GridPiece[][]mapLayout=new GridPiece[20][12];//I think this needs to be not private
 
 
 
