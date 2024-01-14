@@ -31,6 +31,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     }
 
     private void Reset(){
+        maze=new Maze(this);
         player=new Player(Color.YELLOW, this);
         for(int i=0;i<ghosts.length;i++){
             ghosts[i]=new Ghosts(getRandomColor(), this, 480,280);
@@ -40,7 +41,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     }
 
     // all sprites will be in a random color for fun
-    private Color getRandomColor() {
+    public Color getRandomColor() {
         Color color = new Color
         // the color will always be lighter since we want a dark background
         ((int) (Math.random() * 120 + 135), (int) (Math.random() * 120 + 135), (int) (Math.random() * 120 + 135));
@@ -61,6 +62,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
         for(int i=0;i<ghosts.length;i++){
             ghosts[i].drawGhost(g);
         }
+        maze.drawMaze(g);
 
     }
     // Game States

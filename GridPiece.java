@@ -9,6 +9,13 @@ public class GridPiece extends SpriteBase{
         super(new Rectangle2D.Double(x,y,gridSize,gridSize),color);
         this.isWall=isWall;
         this.pacman=p;
+        this.isWall=isWall;
+    }
+
+    public void drawGridPiece(Graphics g){
+        if(isWall){
+            super.draw(g);
+        }
     }
     
 }
