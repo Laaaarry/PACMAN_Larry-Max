@@ -6,7 +6,8 @@ public class Points extends SpriteBase{
     private static int size=10; // size of sprite
     private int value=10; // points given when eaten
     private boolean isEaten = false; 
-    Pacman pacman;
+    private int counter=0;
+    private Pacman pacman;
 
     public Points(int x,int y, Color color, Pacman p){
         super(new Ellipse2D.Double(x,y,size,size), color);
@@ -16,6 +17,23 @@ public class Points extends SpriteBase{
     public void drawPoints(Graphics g){
         if(!isEaten){
             super.draw(g);
+        }
+    }
+
+    public void eaten(){
+        isEaten=true;
+    }
+
+    public int scored(){
+        return value;
+    }
+
+    public void respawn(){
+        if(isEaten){
+            counter++;
+            if(counter>=100){
+                isEaten=false;
+            }
         }
     }
 }

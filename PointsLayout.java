@@ -15,7 +15,7 @@ public class PointsLayout {
         {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
         {true, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}
         };
-    private Points[][]pointsLayout=new Points[12][20];
+    private Points[]pointsLayout;
 
     private Pacman pacman;
 
@@ -25,12 +25,25 @@ public class PointsLayout {
     }
 
     public void spawnPoints(){
-        for(int i=0;i<pointsLayout.length;i++)
+        int numberOfPoints=0;
+        for(int i=0;i<isWall.length;i++)
         {
-            for(int j=0;j<pointsLayout[i].length;j++)
+            for(int j=0;j<isWall[i].length;j++)
             {
                 if(!isWall[i][j]){
-                    pointsLayout[i][j]=new Points(j*50+20,i*50+20, pacman.getRandomColor(), pacman);
+                    numberOfPoints++;
+                }
+            }
+        }
+        pointsLayout=new Points[numberOfPoints];
+        int count=0;
+        for(int i=0;i<isWall.length;i++)
+        {
+            for(int j=0;j<isWall[i].length;j++)
+            {
+                if(!isWall[i][j]){
+                    pointsLayout[count]=new Points(j*50+20,i*50+20, pacman.getRandomColor(), pacman);
+                    count++;
                 }
             }
         }
@@ -39,12 +52,18 @@ public class PointsLayout {
     public void drawAllPoints(Graphics g){
         for(int i=0;i<pointsLayout.length;i++)
         {
-            for(int j=0;j<pointsLayout[i].length;j++)
-            {
-                if(!isWall[i][j]){
-                    pointsLayout[i][j].drawPoints(g);
-                }
-            }
+            pointsLayout[i].drawPoints(g);     
         }
+    }
+
+    public void checkRespawn(){
+        for(int i=0;i<pointsLayout.length;i++)
+        {
+            pointsLayout[i].respawn();
+        }
+    }
+
+    public Points[] getList(){
+        return pointsLayout;
     }
 }

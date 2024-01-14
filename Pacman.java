@@ -17,6 +17,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     private Ghosts[] ghosts=new Ghosts[4];
     private Maze maze;
     private PointsLayout points;
+    private Points[]pointList;
     private int score=0;
 
     // Constructor
@@ -31,8 +32,10 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     }
 
     private void Reset(){
+        score=0;
         maze=new Maze(this);
         points=new PointsLayout(this);
+        pointList=points.getList();
         player=new Player(Color.YELLOW, this);
         for(int i=0;i<ghosts.length;i++){
             ghosts[i]=new Ghosts(getRandomColor(), this, 480,280);
@@ -52,6 +55,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     public void GameCycle(){
         player.movePlayer();
         checkCollisions();
+        points.checkRespawn();
         repaint();
         System.out.print("cycle\t");
     }
@@ -71,20 +75,35 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     // Game States
 
     // Game logic
-
-    // does Pacman collide with a ghost?
     public void checkCollisions(){
-        // creates a rectangle around player and ghosts
+        // creates a rectangle around player, ghosts and points
         Rectangle playerBox=player.getBounds();
+
         Rectangle[] ghostsBox=new Rectangle[ghosts.length];
         for(int i=0;i<ghostsBox.length;i++){
             ghostsBox[i]=ghosts[i].getBounds();
         }
 
+        Rectangle[]pointsBox=new Rectangle[pointList.length];
+        for(int i=0;i<pointsBox.length;i++)
+        {
+            pointsBox[i]=pointList[i].getBounds();
+        }
+
+        // checks if pacman collides with ghost
         for(int i=0;i<ghostsBox.length;i++){
             if(playerBox.intersects(ghostsBox[i])){
                 GameOver=true;
                 GameRunning=false;
+            }
+        }
+
+        // checks if pacman eats a point
+        for(int i=0;i<pointsBox.length;i++)
+        {
+            if(playerBox.intersects(pointsBox[i])){
+                pointList[i].eaten();
+                score+=pointList[i].scored();
             }
         }
     }
