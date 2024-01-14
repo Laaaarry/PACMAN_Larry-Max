@@ -20,6 +20,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     private PointsLayout points;
     private Points[]pointList;
     private int score=0;
+    private int lives=3;
 
     // Constructor
     public Pacman(){
@@ -34,6 +35,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
 
     private void Reset(){
         score=0;
+        lives=3;
         maze=new Maze(this);
         gridList=maze.getLayout();
         points=new PointsLayout(this);
@@ -72,10 +74,35 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
         for(int i=0;i<ghosts.length;i++){
             ghosts[i].drawGhost(g);
         }
-        
-
     }
+
+    // menu screens
+
     // Game States
+    public void newGame(){
+        Reset();
+        GameOver=false;
+        GameRunning=true;
+        GamePaused=false;
+        InMenu=false;
+    }
+    public void pauseGame(){
+        GameRunning=false;
+        GamePaused=true;
+        InMenu=true;
+    }
+    public void resumeGame(){
+        GameRunning=true;
+        GamePaused=false;
+        InMenu=false;
+    }
+    public void endGame(){
+        GameOver=true;
+        GameRunning=false;
+    }
+    public void exit(){
+        System.exit(0);
+    }
 
     // Game logic
     public void checkCollisions(){
@@ -96,8 +123,9 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
         // checks if pacman collides with ghost
         for(int i=0;i<ghostsBox.length;i++){
             if(playerBox.intersects(ghostsBox[i])){
-                GameOver=true;
-                GameRunning=false;
+                loseLife();
+                player.resetPosition();
+                isGameOver();
             }
         }
 
@@ -105,12 +133,24 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
         for(int i=0;i<pointsBox.length;i++)
         {
             if(playerBox.intersects(pointsBox[i])){
-                pointList[i].eaten();
-                score+=pointList[i].scored();
+                if(!pointList[i].isEaten()){
+                    pointList[i].eaten();
+                    score+=pointList[i].scored();
+                }
             }
         }
     }
 
+    public void loseLife(){
+        if(lives>0){
+            lives--;
+        }
+    }
+    public void isGameOver(){
+        if(lives<1){
+            endGame();
+        }
+    }
     public boolean inMazeX(){
         boolean inBoundsX=true;
         Rectangle projectionBox=player.getProjectionX();
@@ -152,18 +192,17 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
         
         int keyCode=e.getKeyCode();
 
-        // starting/pausing the game
+        // changing game states
         if(keyCode==KeyEvent.VK_ENTER && !GameRunning){
-            GameRunning=true;
-            GamePaused=false;
-            InMenu=false;
-            GameOver=false;
+            newGame();
         }
         if(keyCode==KeyEvent.VK_ESCAPE && GameRunning){
-            GameRunning=false;
-            GamePaused=true;
-            InMenu=true;
+            pauseGame();
         }
+        if(keyCode==KeyEvent.VK_SPACE && (!GameRunning && !GameOver)){
+            resumeGame();
+        }
+
         
         // moving Pacman
         // 1 is up, 2 is right, 3 is down, 4 is left

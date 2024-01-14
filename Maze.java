@@ -31,7 +31,7 @@ public class Maze {
         {
             for(int j=0;j<mapLayout[i].length;j++)
             {
-                mapLayout[i][j]=new GridPiece (isWall[i][j],pacman.getRandomColor(),j*50,i*50,pacman);
+                mapLayout[i][j]=new GridPiece (isWall[i][j],new Color(25, 25, 166),j*50,i*50,pacman);
             }
         }
     }

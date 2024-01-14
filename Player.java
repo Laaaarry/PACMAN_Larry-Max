@@ -77,4 +77,7 @@ public class Player extends SpriteBase{
         super.draw(g);
         //g.drawImage(sprite, xPos, yPos, pacman);
     }
+    public void resetPosition(){
+        super.resetPosition(STARTx, STARTy);
+    }
 }

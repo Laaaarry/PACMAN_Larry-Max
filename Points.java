@@ -33,7 +33,12 @@ public class Points extends SpriteBase{
             counter++;
             if(counter>=100){
                 isEaten=false;
+                counter=0;
             }
         }
+    }
+
+    public boolean isEaten(){
+        return isEaten;
     }
 }

@@ -50,4 +50,8 @@ public class SpriteBase {
     public void move(double xDir, double yDir) {
         shape.setFrame(getX() + xDir, getY() + yDir, getWidth(), getHeight());
     }
+
+    public void resetPosition(int STARTx, int STARTy){
+        shape.setFrame(STARTx, STARTy, getWidth(), getHeight());
+    }
 }
