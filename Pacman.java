@@ -16,6 +16,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     private Player player;
     private Ghosts[] ghosts=new Ghosts[4];
     private Maze maze;
+    private GridPiece[][]gridList;
     private PointsLayout points;
     private Points[]pointList;
     private int score=0;
@@ -34,6 +35,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     private void Reset(){
         score=0;
         maze=new Maze(this);
+        gridList=maze.getLayout();
         points=new PointsLayout(this);
         pointList=points.getList();
         player=new Player(Color.YELLOW, this);
@@ -108,6 +110,38 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
             }
         }
     }
+
+    public boolean inMazeX(){
+        boolean inBoundsX=true;
+        Rectangle projectionBox=player.getProjectionX();
+        for(int i=0;i<gridList.length;i++){
+            for(int j=0;j<gridList[i].length;j++){
+                if(gridList[i][j].checkWall()){
+                    Rectangle gridBox=gridList[i][j].getBounds();
+                    if(projectionBox.intersects(gridBox)){
+                        inBoundsX=false;
+                    }
+                }
+            }
+        }
+        return inBoundsX;
+    }
+
+    public boolean inMazeY(){
+        boolean inBoundsY=true;
+        Rectangle projectionBox=player.getProjectionY();
+        for(int i=0;i<gridList.length;i++){
+            for(int j=0;j<gridList[i].length;j++){
+                if(gridList[i][j].checkWall()){
+                    Rectangle gridBox=gridList[i][j].getBounds();
+                    if(projectionBox.intersects(gridBox)){
+                        inBoundsY=false;
+                    }
+                }
+            }
+        }
+        return inBoundsY;
+    }
     // Event Listeners
     public void actionPerformed(ActionEvent e){
         if(GameRunning){
@@ -115,6 +149,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
         }
     }
     public void keyPressed(KeyEvent e){
+        
         int keyCode=e.getKeyCode();
 
         // starting/pausing the game

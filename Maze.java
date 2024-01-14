@@ -17,7 +17,7 @@ public class Maze {
         {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},
         {true, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}
         };
-        GridPiece[][]mapLayout=new GridPiece[12][20];
+    private GridPiece[][]mapLayout=new GridPiece[12][20];
 
 
 
@@ -44,5 +44,9 @@ public class Maze {
                 mapLayout[i][j].drawGridPiece(g);
             }
         }
+    }
+
+    public GridPiece[][]getLayout(){
+        return mapLayout;
     }
 }
