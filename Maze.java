@@ -18,12 +18,14 @@ public class Maze {
         {true, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}
         };
     private GridPiece[][]mapLayout=new GridPiece[12][20];
+    private Color MazeColor;
 
 
-
-    public Maze(Pacman p){
+    public Maze(Pacman p, Color color){
         this.pacman=p;
+        this.MazeColor=color;
         createMaze();
+
     }
     public void createMaze()
     {
@@ -31,7 +33,7 @@ public class Maze {
         {
             for(int j=0;j<mapLayout[i].length;j++)
             {
-                mapLayout[i][j]=new GridPiece (isWall[i][j],new Color(25, 25, 166),j*50,i*50,pacman);
+                mapLayout[i][j]=new GridPiece (isWall[i][j],MazeColor,j*50,i*50,pacman);
             }
         }
     }
