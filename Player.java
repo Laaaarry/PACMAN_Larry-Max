@@ -2,9 +2,9 @@ import java.awt.*;
 import java.awt.geom.*;
 
 public class Player extends SpriteBase{
-    private static int STARTx = 475;
-    private static int STARTy = 400;
-    private static int size = 50;
+    private static int STARTx = 480;
+    private static int STARTy = 405;
+    private static int size = 40;
     private int baseSpeed=10;
     private int speedX;
     private int speedY;

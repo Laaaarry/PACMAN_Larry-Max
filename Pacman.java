@@ -54,6 +54,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     // Game Cycle
     public void GameCycle(){
         player.movePlayer();
+        // move ghosts
         checkCollisions();
         points.checkRespawn();
         repaint();
