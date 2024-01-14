@@ -4,8 +4,9 @@ import java.awt.event.*;
 
 public class Pacman extends JPanel implements ActionListener, KeyListener{
     // instance variables
-    Timer timer = new Timer(1000, this);
+    Timer timer = new Timer(100, this);
 
+    // Game states
     boolean GameRunning = false;
     boolean GameOver = false;
     boolean GamePaused = true;
@@ -15,6 +16,8 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     private Player player;
     private Ghosts[] ghosts=new Ghosts[4];
     private Maze maze;
+    private Points[]points;
+    private int score=0;
 
     // Constructor
     public Pacman(){
@@ -45,6 +48,8 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     }
     // Game Cycle
     public void GameCycle(){
+        player.movePlayer();
+        checkCollisions();
         repaint();
         System.out.print("cycle\t");
     }
@@ -62,6 +67,22 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
 
     // Game logic
 
+    // does Pacman collide with a ghost?
+    public void checkCollisions(){
+        // creates a rectangle around player and ghosts
+        Rectangle playerBox=player.getBounds();
+        Rectangle[] ghostsBox=new Rectangle[ghosts.length];
+        for(int i=0;i<ghostsBox.length;i++){
+            ghostsBox[i]=ghosts[i].getBounds();
+        }
+
+        for(int i=0;i<ghostsBox.length;i++){
+            if(playerBox.intersects(ghostsBox[i])){
+                GameOver=true;
+                GameRunning=false;
+            }
+        }
+    }
     // Event Listeners
     public void actionPerformed(ActionEvent e){
         if(GameRunning){
@@ -70,6 +91,8 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     }
     public void keyPressed(KeyEvent e){
         int keyCode=e.getKeyCode();
+
+        // starting/pausing the game
         if(keyCode==KeyEvent.VK_ENTER && !GameRunning){
             GameRunning=true;
             GamePaused=false;
@@ -80,11 +103,39 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
             GameRunning=false;
             GamePaused=true;
             InMenu=true;
-            GameOver=false;
         }
+        
+        // moving Pacman
+        // 1 is up, 2 is right, 3 is down, 4 is left
+        if(keyCode==KeyEvent.VK_UP && GameRunning){
+            player.setSpeed(1);
+        } 
+        if(keyCode==KeyEvent.VK_RIGHT && GameRunning){
+            player.setSpeed(2);
+        } 
+        if(keyCode==KeyEvent.VK_DOWN && GameRunning){
+            player.setSpeed(3);
+        } 
+        if(keyCode==KeyEvent.VK_LEFT && GameRunning){
+            player.setSpeed(4);
+        } 
     }
     public void keyReleased(KeyEvent e){
+        int keyCode=e.getKeyCode();
 
+        // 0 resets speedX, 10 resets speedY
+        if(keyCode==KeyEvent.VK_UP && GameRunning){
+            player.setSpeed(10);
+        } 
+        if(keyCode==KeyEvent.VK_RIGHT && GameRunning){
+            player.setSpeed(0);
+        } 
+        if(keyCode==KeyEvent.VK_DOWN && GameRunning){
+            player.setSpeed(10);
+        } 
+        if(keyCode==KeyEvent.VK_LEFT && GameRunning){
+            player.setSpeed(0);
+        } 
     }
     public void keyTyped(KeyEvent e){
 

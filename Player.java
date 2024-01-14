@@ -5,8 +5,7 @@ public class Player extends SpriteBase{
     private static int STARTx = 475;
     private static int STARTy = 400;
     private static int radius = 50;
-    private int xPos=STARTx;
-    private int yPos=STARTy;
+    private int baseSpeed=10;
     private int speedX;
     private int speedY;
     private Pacman pacman;
@@ -22,6 +21,26 @@ public class Player extends SpriteBase{
         }
         if(getY()+speedY >=0 && (getY() + getHeight() + speedY <= pacman.getHeight())){
             super.move(0,speedY);
+        }
+    }
+    public void setSpeed(int direction){
+        if(direction==1){
+            speedY=-baseSpeed;
+        }
+        if(direction==2){
+            speedX=baseSpeed;
+        }
+        if(direction==3){
+            speedY=baseSpeed;
+        }
+        if(direction==4){
+            speedX=-baseSpeed;
+        }
+        if(direction==0){
+            speedX=0;
+        }
+        if(direction==10){
+            speedY=0;
         }
     }
     public void drawPacman(Graphics g){
