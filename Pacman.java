@@ -16,7 +16,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     private Player player;
     private Ghosts[] ghosts=new Ghosts[4];
     private Maze maze;
-    private Points[]points;
+    private PointsLayout points;
     private int score=0;
 
     // Constructor
@@ -32,6 +32,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
 
     private void Reset(){
         maze=new Maze(this);
+        points=new PointsLayout(this);
         player=new Player(Color.YELLOW, this);
         for(int i=0;i<ghosts.length;i++){
             ghosts[i]=new Ghosts(getRandomColor(), this, 480,280);
@@ -58,11 +59,13 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     public void paint(Graphics g){
         super.paint(g);
         Graphics2D g2=(Graphics2D)g;
+        maze.drawMaze(g);
+        points.drawAllPoints(g);
         player.drawPacman(g);
         for(int i=0;i<ghosts.length;i++){
             ghosts[i].drawGhost(g);
         }
-        maze.drawMaze(g);
+        
 
     }
     // Game States

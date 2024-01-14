@@ -4,14 +4,14 @@ import java.awt.geom.*;
 public class Player extends SpriteBase{
     private static int STARTx = 475;
     private static int STARTy = 400;
-    private static int radius = 50;
+    private static int size = 50;
     private int baseSpeed=10;
     private int speedX;
     private int speedY;
     private Pacman pacman;
     
     public Player(Color color, Pacman p){
-        super( new Ellipse2D.Double(STARTx,STARTy,radius,radius),color);
+        super( new Ellipse2D.Double(STARTx,STARTy,size,size),color);
         this.pacman=p;
     }
 

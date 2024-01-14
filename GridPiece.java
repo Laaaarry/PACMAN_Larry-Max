@@ -18,4 +18,7 @@ public class GridPiece extends SpriteBase{
         }
     }
     
+    public boolean checkWall(){
+        return isWall;
+    }
 }

@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 public class Ghosts extends SpriteBase {
-    private static int radius = 40;
+    private static int size = 40;
     private int counter=0;
     private int xPos;
     private int yPos;
@@ -10,7 +10,7 @@ public class Ghosts extends SpriteBase {
     private int speedY;
 
     public Ghosts(Color color, Pacman p, int x, int y){
-        super(new Rectangle2D.Double(x,y,radius,radius),color);
+        super(new Rectangle2D.Double(x,y,size,size),color);
         this.pacman=p;
         this.xPos=x;
         this.yPos=y;
