@@ -22,6 +22,8 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
     private int score=0;
     private int lives=3;
 
+    private Color textColor=Color.WHITE;
+
     // Constructor
     public Pacman(){
         addKeyListener(this);
@@ -76,7 +78,20 @@ public class Pacman extends JPanel implements ActionListener, KeyListener{
         }
     }
 
+    // A method used for displaying text on screen
+    public void GameText(String message, int x, int y, Color color, int size, Graphics g) {
+        Font gFont = new Font("ComicSans", Font.BOLD + Font.ITALIC, size);
+        g.setFont(gFont);
+        g.setColor(color);
+        g.drawString(message, x, y);
+    }
+
+    // in game UI
+
     // menu screens
+    public void drawMenu(Graphics g){
+
+    }
 
     // Game States
     public void newGame(){
