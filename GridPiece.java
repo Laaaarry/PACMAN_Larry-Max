@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-// the entire game "map" is a grid comprised of 50 by 50 blocks
+// the entire game "map" is a grid comprised of 50 by 50 blocks - Lawrence
 public class GridPiece extends SpriteBase{
     // instance variables
     private boolean isWall; // whether the block is a wall or not

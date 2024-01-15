@@ -19,7 +19,7 @@ public class Player extends SpriteBase {
         this.pacman = p;
     }
 
-    // moves the player (called in the game cycle)
+    // moves the player (called in the game cycle) - Lawrence & Max
     public void movePlayer() {
         // every time the movePlayer method is called, checks if the player will move "out of bounds" after the movement
         // if the player does, sets the speed to 0 to stop the player from moving
@@ -70,6 +70,7 @@ public class Player extends SpriteBase {
         }
     }
 
+    // Lawrence & Max
     // creates and returns a "projection" of the player after moving in the x or y direction
     // used to check if the player is still "in bounds"
     public Rectangle getProjectionX() {

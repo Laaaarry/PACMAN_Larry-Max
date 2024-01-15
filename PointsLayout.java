@@ -1,8 +1,8 @@
 import java.awt.*;
 
-// a class that determines how many points to create and where the points are
+// a class that determines how many points to create and where the points are - Lawrence
 public class PointsLayout {
-    // essentially the same array as the one in Maze, except the 8 pieces at the center are "walls"
+    // essentially the same array as the one in Maze, except the 8 pieces at the center are "walls" - Lawrence
     private boolean[][]isWall={
         {true, true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true},
         {true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true},

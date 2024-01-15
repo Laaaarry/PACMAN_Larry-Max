@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 // class that contains the frame and main method that runs the program
+// Made by Lawrence
 public class Main extends JFrame{
     // main method
     public static void main(String[]args){

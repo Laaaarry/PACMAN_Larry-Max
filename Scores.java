@@ -1,5 +1,5 @@
 import java.awt.*;
-// class for displaying the scores and keeping track of the high score
+// class for displaying the scores and keeping track of the high score - Max
 public class Scores 
 {
     // instance variables

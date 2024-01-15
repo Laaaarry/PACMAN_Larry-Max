@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+// used a lot of code from Lawrence's grade 11 compsci culminating
 public class Pacman extends JPanel implements ActionListener, KeyListener {
     // instance variables
     // Game states
@@ -41,7 +42,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         Reset();
     }
 
-    // Resets the game (recreates all components of the game)
+    // Resets the game (recreates all components of the game) - Lawrence
     private void Reset() {
         score = 0;
         lives = 3;
@@ -65,8 +66,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         return color;
     }
 
-    // Game Cycle - the methods that are run in each "cycle" of the game
-    // (animations, collisions, etc.)
+    // Game Cycle - the methods that are run in each "cycle" of the game (animations, collisions, etc.) - Lawrence
     public void GameCycle() {
         player.movePlayer();
         // move ghosts
@@ -77,7 +77,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         // System.out.print("cycle\t");
     }
 
-    // Paint methods
+    // Paint methods - Lawrence & Max
     public void paint(Graphics g) {
         super.paint(g);
 
@@ -101,8 +101,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    // A method used for displaying text on screen (taken from Lawrence's grade 11
-    // culminating project)
+    // A method used for displaying text on screen (taken from Lawrence's grade 11 compsci culminating)
     public void GameText(String message, int x, int y, Color color, int size, Graphics g) {
         Font gFont = new Font("ComicSans", Font.BOLD, size);
         g.setFont(gFont);
@@ -115,7 +114,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         GameText("Lives: " + lives, 0, 580, textColor, 15, g);
     }
 
-    // menu screens
+    // menu screens - Lawrence
     public void drawMenu(Graphics g) {
         // creates the base where the menu is on
         g.setColor(Color.YELLOW);
@@ -159,7 +158,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         GameText("Press 0", 450, 500, pacmanBlue, 24, g);
     }
 
-    // Game States (self-explanatory)
+    // Game States (self-explanatory) - Lawrence
     public void newGame() {
         // resets the game when creating a new game
         Reset();
@@ -189,7 +188,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         System.exit(0);
     }
 
-    // Game logic
+    // Game logic - Lawrence
     // Checking for collisions between game componenets
     public void checkCollisions() {
         // creates a rectangle around player, ghosts and points
@@ -242,6 +241,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         }
     }
 
+    // Lawrence & Max
     // creates a projection of the player after moving horizontally
     // checks if the projection goes through a wall
     // returns boolean "inBounds" (true if inside maze, false if clipping through a wall)
@@ -279,7 +279,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         return inBoundsY;
     }
 
-    // Event Listeners
+    // Event Listeners - Lawrence
     // Takes action event from timer to animate game
     public void actionPerformed(ActionEvent e) {
         if (GameRunning) {
@@ -292,7 +292,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    // key events, controlled by the player
+    // key events, controlled by the player - Lawrence
     public void keyPressed(KeyEvent e) {
 
         int keyCode = e.getKeyCode();

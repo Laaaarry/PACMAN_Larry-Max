@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.geom.*;
 
-// sprite for the "pac-dots" that the player eats to earn points
+// sprite for the "pac-dots" that the player eats to earn points - Lawrence
 public class Points extends SpriteBase{
     // instance variables
     private static int size=10; // size of sprite
