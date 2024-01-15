@@ -12,7 +12,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     boolean InMenu = true;
 
     // Game components
-    Timer timer = new Timer(100, this);
+    Timer timer = new Timer(50, this);
     private Player player;
     private Ghosts[] ghosts = new Ghosts[4];
     private Maze maze;
