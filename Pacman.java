@@ -21,6 +21,8 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     private Points[] pointList;
     private int score = 0;
     private int lives = 3;
+    private Scores scores=new Scores(this);
+
 
     // Colors
     private Color textColor = Color.WHITE;
@@ -83,6 +85,12 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
 
         if (!GameRunning) {
             drawMenu(g);
+        }
+        //calling methods in score class
+        if (GameRunning)
+        {
+            scores.setScore(g);
+            scores.setHighScore(g);
         }
     }
 
@@ -198,7 +206,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
             if (playerBox.intersects(pointsBox[i])) {
                 if (!pointList[i].isEaten()) {
                     pointList[i].eaten();
-                    score += pointList[i].scored();
+                    score += 1;
                 }
             }
         }
