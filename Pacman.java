@@ -19,7 +19,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     private GridPiece[][] gridList;
     private PointsLayout points;
     private Points[] pointList;
-    private int score = 0;
+    public int score = 0;
     private int lives = 3;
     private Scores scores=new Scores(this);
 
