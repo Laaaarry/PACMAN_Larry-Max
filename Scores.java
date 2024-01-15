@@ -12,7 +12,7 @@ public class Scores
     //setting scoreboard
     public void setScore(Graphics g)
     {
-        p.GameText("Score: "+p.score,0,600,Color.WHITE,15,g);
+        p.GameText("Score: "+p.score,80,580,Color.WHITE,15,g);
     }
     
     public void setHighScore(Graphics g)
@@ -21,6 +21,10 @@ public class Scores
         {
             highScore=p.score;
         }
-            p.GameText("High Score: "+highScore,100,600,Color.WHITE,15,g);
+            p.GameText("High Score: "+highScore,200,580,Color.WHITE,15,g);
+    }
+
+    public int getHighScore(){
+        return highScore;
     }
 }
