@@ -222,7 +222,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
             if (playerBox.intersects(pointsBox[i])) {
                 if (!pointList[i].isEaten()) {
                     pointList[i].eaten();
-                    score += 1;
+                    score += pointList[i].scored();
                 }
             }
         }
