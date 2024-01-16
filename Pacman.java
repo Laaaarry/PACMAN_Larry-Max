@@ -69,7 +69,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
     // Game Cycle - the methods that are run in each "cycle" of the game (animations, collisions, etc.) - Lawrence
     public void GameCycle() {
         player.movePlayer();
-        // move ghosts
+        updateGhosts();
         checkCollisions();
         points.checkRespawn();
         repaint();
@@ -277,6 +277,44 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
             }
         }
         return inBoundsY;
+    }
+
+    // performs the same functions as inMazeX
+    public boolean GhostsInMazeX(Rectangle projectionBox){
+        boolean inBoundsX = true;
+        for (int i = 0; i < gridList.length; i++) {
+            for (int j = 0; j < gridList[i].length; j++) {
+                if (gridList[i][j].checkWall()) {
+                    Rectangle gridBox = gridList[i][j].getBounds();
+                    if (projectionBox.intersects(gridBox)) {
+                        inBoundsX = false;
+                    }
+                }
+            }
+        }
+        return inBoundsX;
+    }
+
+    // performs the same functions as inMazeY
+    public boolean GhostsInMazeY(Rectangle projectionBox){
+        boolean inBoundsY = true;
+        for (int i = 0; i < gridList.length; i++) {
+            for (int j = 0; j < gridList[i].length; j++) {
+                if (gridList[i][j].checkWall()) {
+                    Rectangle gridBox = gridList[i][j].getBounds();
+                    if (projectionBox.intersects(gridBox)) {
+                        inBoundsY = false;
+                    }
+                }
+            }
+        }
+        return inBoundsY;
+    }
+
+    public void updateGhosts(){
+        for(int i=0;i<ghosts.length;i++){
+            ghosts[i].moveGhost();
+        }
     }
 
     // Event Listeners - Lawrence
