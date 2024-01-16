@@ -6,7 +6,7 @@ public class GridPiece extends SpriteBase{
     // instance variables
     private boolean isWall; // whether the block is a wall or not
     public static double gridSize=50;
-    private Pacman pacman;
+    private Pacman pacman; // reference for panel in case we needed it
 
     // constructor
     public GridPiece(boolean isWall, Color color, int x, int y, Pacman p){
