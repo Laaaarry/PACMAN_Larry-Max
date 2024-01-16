@@ -1,39 +1,47 @@
 import java.util.*;
 import java.awt.*;
 import java.awt.geom.*;
+// Lawrence and Max
 public class Ghosts extends SpriteBase {
+    // instance variables
     private static int size = 40;
-    private int initialCounter=0;
-    private int randomizationCounter=99;
-    private int xPos;
-    private int yPos;
+    private int initialCounter=0; // we needed the ghosts to move out of their box
+    private int randomizationCounter=99; 
+    // every 100 game cycles, the ghost's speed is randomized, 
+    // but we want the ghosts to start moving instantly after their initialization period ends
     private Pacman pacman;
     private int baseSpeed = 10;
     private int speedX;
     private int speedY;
 
+    // constructor
     public Ghosts(Color color, Pacman p, int x, int y){
         super(new Rectangle2D.Double(x,y,size,size),color);
         this.pacman=p;
-        this.xPos=x;
-        this.yPos=y;
     }
 
+    // moves the ghost up, out of their box in the first few cycles of the game
     public void initGhost(){
         speedY=-baseSpeed;
         moveGhostY();
         initialCounter++;
     }
+    
+    // the main function for moving ghosts
     public void moveGhost(){
+        // if the game has just started, moves the ghost up and out of the box, through the walls
         if(initialCounter<12){
             initGhost();
         }
+        // otherwise, uses random movements
         else{
             randomMovement();
             baseMovement();
         }
     }
 
+    // the basic movement method
+    // uses same type of code as Player class to ensure it doesn't go through walls
     public void baseMovement(){
         if (!pacman.GhostsInMazeX(getProjectionX())) {
             speedX = 0;
@@ -45,6 +53,8 @@ public class Ghosts extends SpriteBase {
         moveGhostY();
     }
 
+    // changes the x and y speeds of the ghosts randomly
+    // every 100 cycles or when the current speed is 0
     public void randomMovement(){
         randomizationCounter++;
         if(randomizationCounter==100){
@@ -58,9 +68,9 @@ public class Ghosts extends SpriteBase {
         if(speedY==0){
             randomMovementY();
         }
-
     }
 
+    // randomly sets the x-direction to be left or right
     public void randomMovementX(){
         double random = Math.random();
         if(random>0.5){
@@ -71,6 +81,7 @@ public class Ghosts extends SpriteBase {
         }
     }
 
+    // randomly sets the y-direction to be up or down
     public void randomMovementY(){
         double random = Math.random();
         if(random>0.5){
@@ -95,13 +106,15 @@ public class Ghosts extends SpriteBase {
         }
     }
 
+    // draws the ghost
     public void drawGhost(Graphics g){
         super.draw(g);
     }
 
     // Lawrence & Max
-    // creates and returns a "projection" of the player after moving in the x or y direction
-    // used to check if the player is still "in bounds"
+    // creates and returns a "projection" of the ghost after moving in the x or y direction
+    // used to check if the ghost is still "in bounds"
+    // (uses same code as Player class)
     public Rectangle getProjectionX() {
         Rectangle projection = this.getBounds();
         projection.setBounds((int) projection.getX() + speedX, (int) projection.getY(), (int) projection.getWidth(),

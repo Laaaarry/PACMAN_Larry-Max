@@ -311,6 +311,7 @@ public class Pacman extends JPanel implements ActionListener, KeyListener {
         return inBoundsY;
     }
 
+    // loops through the array of ghosts and moves all of them
     public void updateGhosts(){
         for(int i=0;i<ghosts.length;i++){
             ghosts[i].moveGhost();
